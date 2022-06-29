@@ -1,0 +1,19 @@
+{% extends 'templates/base.html' %}
+
+{% block title %} Турнирная таблица {% endblock %}
+
+{% block content %}
+
+    <div class="features">
+        <h2>Турнирная таблица</h2>
+
+
+
+        {% for com, res in tournament_table.items %}
+            <div class="alert alert-warning">
+                <h3><a href="{% url 'id' id=res.self_command.pk %}">{{ com }}:</a> {{ res }} </h3>
+            </div>
+        {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+
+{% block css_add %}
+
+
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
+{% block title %} Игрок {% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="container marketing">
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">{{ player.first_name }} {{ player.last_name }} </h2>
+        <p></p>
+          {% if player.is_captain == True %}
+        <p class="lead">Капитан команды</p>
+          {% endif %}
+
+          <div class="row g-5">
+            <div class="col-md-6">
+              <p class="lead">Дата рождения:</p>
+              <p class="lead">Команда:</p>
+              <p class="lead">Позиция:</p>
+            </div>
+
+            <div class="col-md-6">
+              <p class="lead">{{ player.date_of_birth }}</p>
+              <p class="lead">{{ player.command }}</p>
+              <p class="lead">{{ player.role }}</p>
+
+            </div>
+          </div>
+        </div>
+
+       <div class="card-body align-items-center">
+         {% if not player.photo %}
+           <img src="{% static 'img/player.jpg' %}" alt="" width="320" height="320">
+         {% else %}
+           <img src="{{ player.photo.url }}" alt="" width="320" height="320">
+         {% endif %}
+       </div>
+      </div>
+
+    <h2>Статистика</h2>
+    <p></p>
+      <div class="row row-cols-md-3 mb-3">
+      <div class="col themed-grid-col"><code> Голы: 0 </code> </div>
+      <div class="col themed-grid-col"><code>Передачи: 0 </code> </div>
+      <div class="col themed-grid-col"><code>ЖК: 0 </code> </div>
+      <div class="col themed-grid-col"><code>КК: 0 </code> </div>
+
+    </div>
+
+
+
+{% endblock %}

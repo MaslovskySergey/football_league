@@ -1,0 +1,16 @@
+{% extends 'league/base.html' %}
+
+{% block title %} Игроки {% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Список игроков</h1>
+
+        {% for el in player %}
+            <div class="alert alert-warning">
+                <h3>{{ el.name }} {{ el.age }} {{ el.goals }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

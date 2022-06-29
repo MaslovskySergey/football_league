@@ -1,0 +1,143 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/create_capitan.css' %}">
+<link rel="stylesheet" href=" {% static 'css/mdb.min.css' %}">
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+
+{% endblock %}
+
+{% block title %} Создание игрока {% endblock %}
+
+{% block content %}
+
+
+<form enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+
+<section class="vh-100 bg-image"
+  style="background-image: url('/static/img/capitan.jpg')">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+
+    <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+          <h1 class="text-center" >Капитан команды </h1>
+          <br>
+
+          <label for="id_first_name"><b>Имя</b></label>
+          <input type="text" name="first_name" class="form-control" placeholder="Введите имя" required="" maxlength="50" id="id_first_name">
+<!--            {{ form.first_name }}-->
+
+          <label for="id_last_name"><b>Фамилия</b></label>
+          <input type="text" name="last_name" class="form-control" placeholder="Введите фамилию" required="" maxlength="50" id="id_last_name">
+<!--            {{ form.last_name }}-->
+
+          <label for="id_date_of_birth"><b>Дата рождения</b></label>
+          <input type="text" name="date_of_birth" class="form-control" placeholder="Введите дату" required="" maxlength="50" id="id_date_of_birth">
+<!--            {{ form.date_of_birth }}-->
+
+            <br>
+            <br>
+
+          <label for="id_role"><b>Амплуа:</b></label>
+          <select name="role" required="" id="id_role">
+
+              <option value="" selected="">---------</option>
+              <option value="Вратарь">Вратарь</option>
+              <option value="Защитник">Защитник</option>
+              <option value="Полузащитник">Полузащитник</option>
+              <option value="Нападающий">Нападающий</option>
+
+          </select>
+<!--            {{ form.role }}-->
+            <br>
+            <br>
+
+          <label ><b>Команда: {{ command.name }}</b></label>
+
+<!--            {{ command.name }}-->
+            {{ form.command.as_hidden }}
+            <br>
+            <br>
+
+          <label for="id_photo"><b>Фото:</b></label>
+          <input type="file" name="photo" accept="image/*" id="id_photo">
+<!--            {{ form.photo }}-->
+             <br>
+             <br>
+
+          <button type="submit">Добавить</button>
+
+
+</form>
+                 </div>
+               </div>
+             </div>
+           </div>
+    </div>
+  </div>
+
+</section>
+    
+{% endblock %}
+
+
+
+
+<!--    <div class="features">-->
+<!--            <h1>Капитан</h1>-->
+<!--            <form method="post">-->
+<!--                {% csrf_token %}-->
+
+<!--        <div class="row g-3">-->
+<!--      <div class="col">-->
+<!--          {{ form.first_name }}-->
+
+<!--&lt;!&ndash;        <input type="text" class="form-control" placeholder="Имя" aria-label="Имя">&ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--          {{ form.last_name }}-->
+<!--&lt;!&ndash;        <input type="text" class="form-control" placeholder="Фамилия" aria-label="Фамилия">&ndash;&gt;-->
+<!--      </div>-->
+
+<!--            <label for="start">Дата рождения:</label>-->
+<!--            {{ form.date_of_birth }}-->
+<!--&lt;!&ndash;    <input type="date" id="start" name="trip-start"&ndash;&gt;-->
+<!--&lt;!&ndash;           value="2018-07-22"&ndash;&gt;-->
+<!--&lt;!&ndash;           min="1950-01-01" max="2018-12-31">&ndash;&gt;-->
+
+<!--        <div class="col-auto">-->
+<!--        <label class="visually-hidden" for="autoSizingSelect">Команда: {{ command.name }}</label>-->
+<!--            {{ form.command.as_hidden }}-->
+<!--&lt;!&ndash;        <select class="form-select" id="id">&ndash;&gt;-->
+<!--&lt;!&ndash;          <option selected>Choose...</option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="1">{{ command }}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--      </div>-->
+<!--        <div class="col-auto">-->
+<!--        <label class="visually-hidden" for="autoSizingSelect">Амплуа</label>-->
+<!--            {{ form.role }}-->
+<!--&lt;!&ndash;        <select class="form-select" id="autoSizingSelect">&ndash;&gt;-->
+<!--&lt;!&ndash;          <option selected>Choose...</option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="1"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="2">Защитник</option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="3">Полузащитник</option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="4">Нападающий</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+
+<!--            {{ form.photo }}-->
+
+<!--      </div>-->
+<!--        <div class="col-12">-->
+<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--      </div>-->
+<!--        </div>-->
+<!--            </form>-->
+<!--    </div>-->

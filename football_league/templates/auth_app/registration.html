@@ -1,0 +1,93 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/registration.css' %}">
+<link rel="stylesheet" href=" {% static 'css/mdb.min.css' %}">
+
+
+
+{% endblock %}
+
+{% block title %} Регистрация {% endblock %}
+
+
+{% block content %}
+
+
+<section class="vh-100 bg-image"
+  style="background-image: url('/static/img/fon_2_1280x648.jpg')">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Создание аккаунта</h2>
+
+              <form method="post" action="{% url 'registration' %}">
+              {% csrf_token %}
+
+
+
+                    <div class="form-outline mb-4">
+                      <input type="text" id="username" name="username" maxlength="150" autocapitalize="none" autocomplete="username" required="" class="form-control form-control-lg active">
+                      <label class="form-label" for="username" style="margin-left: 0px;">Your Name </label>
+<!--                        {{ form.username }}-->
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 71.2px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                    <div class="form-outline mb-4">
+                      <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" class="form-control form-control-lg active">
+                      <label class="form-label" style="margin-left: 0px;">Password</label>
+<!--                        {{ form.password1 }}-->
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                    <div class="form-outline mb-4">
+                      <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" class="form-control form-control-lg active">
+                      <label class="form-label" style="margin-left: 0px;">Repeat your password</label>
+<!--                        {{ form.password2 }}-->
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 136px;"></div><div class="form-notch-trailing"></div></div></div>
+
+
+                    <div class="d-flex justify-content-center">
+                      <button class="btn mt-2 btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+<!--                      <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Register</button>-->
+                    </div>
+
+                  </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+
+<!--<form class="form-signin" method="post" action="{% url 'registration' %}">-->
+<!--            {% csrf_token %}-->
+
+<!--        <div class="card text-center">-->
+<!--                 <h1>Для регистрации укажите имя пользователя и пароль</h1>-->
+<!--        </div>-->
+<!--       <br>-->
+<!--            <div class="col-md-4 mb-3 mx-auto">-->
+<!--                <label for="inputUsername" class="sr-only">Имя пользователя</label>-->
+<!--                {{ form.username }}-->
+<!--                <label for="inputPassword" class="sr-only">Пароль</label>-->
+
+<!--                {{ form.password1 }}-->
+<!--                <label for="ReInputPassword" class="sr-only">Повторите пароль</label>-->
+
+<!--                {{ form.password2 }}-->
+<!--                <button class="btn mt-2 btn-lg btn-primary btn-block" type="submit">Регистрация</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
+

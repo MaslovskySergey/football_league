@@ -1,0 +1,51 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/info_command.css' %}">
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
+{% block title %} Команды {% endblock %}
+
+{% block content %}
+
+
+  <div class="container marketing bg-light">
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+        {% for command in commands %}
+          <div class="col-md-3">
+            <div class="card shadow-sm">
+              {% if command.command_photo %}
+            <a href="{% url 'id' id=command.id %}"> <img src="{{ command.command_photo.url }}" class="card-img-top" width="100%" height="200" alt="..."></a>
+              {% else %}
+            <a href="{% url 'id' id=command.id %}"> <img src="{% static 'img/com_photo.jpg' %}" class="card-img-top" width="100%" height="200" alt="..."></a>
+              {% endif %}
+              <div class="card-body">
+                  <p class="card-text"><h4>{{ command.name }}</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'id' id=command.id %}">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+            <br>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+<!--</div>-->
+
+
+{% endblock %}
+

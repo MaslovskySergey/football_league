@@ -1,0 +1,106 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/matches_tournament.css' %}">
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+{% endblock %}
+
+{% block title %} Матчи {% endblock %}
+
+{% block content %}
+
+
+<div class="container marketing bg-light">
+  {% include 'templates/includes/navbar.html' %}
+
+  <div class="text-center">
+    <br>
+    <div class="features">
+      <h2>Календарь матчей</h2>
+      <br>
+      <br>
+
+        {% for match in tournament.matches.all %}
+          <div class="alert alert-warning">
+
+            {{ match.date_and_time }}
+            <h3><a href="{% url 'match' match_id=match.pk %}">{{ match.command_a }} - {{ match.command_b }}</a></h3>
+          </div>
+          </div>
+
+        {% endfor %}
+
+
+{% if user.is_superuser %}
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto; text-center">Создание Матча</button>
+
+    <div id="id01" class="modal">
+      <div class="container px-5">
+
+        <form class="modal-content animate" action="{% url 'matches_tournament' tournament_id=tournament.pk %}" method="post">
+          {% csrf_token %}
+
+          <div class="container px-5">
+
+            <b>Турнир: {{ tournament.title }}</b>
+            {{ form.tournament.as_hidden }}
+            <br>
+            <br>
+
+            <div class="inputdatetime">
+              <label for="id_date_and_time"><b>Дата и время матча:</b></label>
+              <input type="datetime-local" name="date_and_time" class="form-control" placeholder="Выберете дату и время" required="" maxlength="50" id="id_date_and_time">
+<!--            {{ form.date_and_time }}-->
+            </div>
+            <br>
+
+<!--              <input type="radio" name="{{ question.question }}" id="{{ command_a.id }}" value="{{ command_a.id }}" required>-->
+<!--              <label for="{{ command_a.id }}">{{ command_a.name }}</label><br/>-->
+            <div class="text-center">
+              <b>Выбор команд:</b></div>
+            <br>
+
+            <div class="row align-items-md-stretch">
+              <div class="col-md-6">
+                <select class="form-select" aria-label="Выбор команды">
+                  {% for command_a in commands_in_tournament %}
+                <option value="{{ command_a.id }}">{{command_a.name}}</option>
+<!--                <option value="{{ command_a.id }}">{{command_a.name}}</option>-->
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <select class="form-select" aria-label="Выбор команды">
+                  {% for command_a in commands_in_tournament %}
+                <option value="{{ command_a.id }}">{{command_a.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <br>
+
+            <div class="container">
+              <div class="row justify-content-evenly">
+                <div class="col-4">
+                  <button type="submit">Добавить</button>
+                </div>
+                <div class="col-4">
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+        </form>
+
+    </div>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}

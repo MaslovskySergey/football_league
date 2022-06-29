@@ -1,0 +1,16 @@
+{% extends 'templates/base.html' %}
+
+{% block title %} Таблица ассистентов {% endblock %}
+
+{% block content %}
+
+    <div class="features">
+        <h2>Таблица ассистентов</h2>
+
+        {% for player_last_name, data in assistants_table.items %}
+            <div class="alert alert-warning">
+                <h3><a href="{% url 'player' id=data.self_player.pk %}">{{ player_last_name }}:</a> {{ data.assist }} </h3>
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}

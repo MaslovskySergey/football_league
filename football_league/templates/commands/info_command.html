@@ -1,0 +1,210 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+
+<link rel="stylesheet" href=" {% static 'css/info_command.css' %}">
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block title %} {{ command }} {% endblock %}
+
+{% block content %}
+
+
+<!--<hr class="featurette-divider">-->
+
+<div class="container marketing bg-light">
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+          <br>
+          <br>
+        <h1 class="featurette-heading">{{ command }} </h1>
+    </div>
+
+
+
+          <div class="card-body align-items-center">
+         {% if command.logo %}
+            <img src="{{ command.logo.url }}"  width="173" height="173" alt="...">
+              {% else %}
+            <img src="{% static 'img/logotip.jpg' %}"  width="173" height="173" alt="...">
+            {% endif %}
+    </div>
+  </div>
+
+
+
+{% if command.command_photo %}
+
+        <div class="text-center">
+        <div class="d-grid gap-2 justify-content-sm-center mb-5">
+        <div class="container px-5">
+            <img src="{{ command.command_photo.url }}" class="img-fluid" width="910" alt="...">
+        </div>
+      </div>
+    </div>
+            {% endif %}
+
+
+<div class="album bg-light">
+    <div class="container">
+      <div class="row">
+        {% for player in command.players.all %}
+        <div class="col-md-3">
+          <div class="card shadow-sm">
+              {% if player.photo %}
+            <a href="{% url 'player' id=player.id %}"> <img src="{{ player.photo.url }}" class="card-img-top" width="100%" height="235" alt="..."></a>
+              {% else %}
+            <a href="{% url 'player' id=player.id %}"> <img src="{% static 'img/player.jpg' %}" class="card-img-top" width="100%" height="235" alt="..."></a>
+            {% endif %}
+              <div class="card-body">
+                  <p class="card-text"><h4>{{ player.first_name }} {{ player.last_name }}</h4></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'player' id=player.id %}">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+            <br>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+
+{% if user.is_superuser or user.is_authenticated and user.player.command == command %}
+
+
+
+
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Добавить игрока</button>
+
+    <div id="id01" class="modal">
+    <div class="container px-5">
+
+      <form class="modal-content animate" enctype="multipart/form-data" method="post">
+
+          {% csrf_token %}
+
+
+        <div class="container px-5">
+
+          <label for="id_first_name"><b>Имя</b></label>
+          <input type="text" name="first_name" class="form-control" placeholder="Имя игрока" required="" maxlength="50" id="id_first_name">
+<!--            {{ form.first_name }}-->
+
+          <label for="id_last_name"><b>Фамилия</b></label>
+          <input type="text" name="last_name" class="form-control" placeholder="Фамилия игрока" required="" maxlength="50" id="id_last_name">
+<!--            {{ form.last_name }}-->
+
+          <label for="id_date_of_birth"><b>Дата рождения</b></label>
+          <input type="text" name="date_of_birth" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_date_of_birth">
+<!--            {{ form.date_of_birth }}-->
+
+            <br>
+            <br>
+
+          <label for="id_role"><b>Амплуа:</b></label>
+          <select name="role" required="" id="id_role">
+
+  <option value="" selected="">---------</option>
+  <option value="Вратарь">Вратарь</option>
+  <option value="Защитник">Защитник</option>
+  <option value="Полузащитник">Полузащитник</option>
+  <option value="Нападающий">Нападающий</option>
+
+</select>
+<!--            {{ form.role }}-->
+            <br>
+            <br>
+
+          <label ><b>Команда: {{ command.name }}</b></label>
+
+<!--            {{ command.name }}-->
+            {{ form.command.as_hidden }}
+            <br>
+            <br>
+
+          <label for="id_photo"><b>Фото:</b></label>
+          <input type="file" name="photo" accept="image/*" id="id_photo">
+<!--            {{ form.photo }}-->
+             <br>
+             <br>
+
+      <button type="submit">Добавить</button>
+             <br>
+             <br>
+
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+
+  </form>
+</div>
+</div>
+</div>
+
+<!--{{ form.first_name }}-->
+<!--{{ form.last_name }}-->
+<!--{{ form.date_of_birth }}-->
+<!--    {{ command.name }}-->
+<!--    {{ form.command.as_hidden }}-->
+<!--{{ form.role }}-->
+<!--{{ form.photo }}-->
+
+<script src="{% static 'js/info_command.js' %}"></script>
+    {% endif %}
+{% endblock %}
+
+
+
+
+<!--    <div class="features">-->
+
+<!--            <h1>Добавить игрока</h1>-->
+
+<!--            <form method="post" enctype="multipart/form-data">-->
+<!--                {% csrf_token %}-->
+
+<!--        <div class="row g-3">-->
+<!--      <div class="col">-->
+<!--          {{ form.first_name }}-->
+
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--          {{ form.last_name }}-->
+
+<!--      </div>-->
+
+<!--            <label for="start">Дата рождения:</label>-->
+<!--            {{ form.date_of_birth }}-->
+
+
+<!--        <div class="col-auto">-->
+<!--        <label class="visually-hidden" for="autoSizingSelect">Команда: {{ command.name }}</label>-->
+<!--            {{ form.command.as_hidden }}-->
+<!--      </div>-->
+
+<!--        <div class="col-auto">-->
+<!--        <label class="visually-hidden" for="autoSizingSelect">Амплуа</label>-->
+<!--            {{ form.role }}-->
+<!--      </div>-->
+
+
+<!--            {{ form.photo }}-->
+
+<!--        <div class="col-12">-->
+<!--        <button type="submit" class="btn btn-primary">Добавить</button>-->
+<!--      </div>-->
+<!--        </div>-->
+<!--            </form>-->
+
+<!--    </div>-->

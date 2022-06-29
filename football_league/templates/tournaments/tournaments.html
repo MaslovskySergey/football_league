@@ -1,0 +1,132 @@
+
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/info_command.css' %}">
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block title %} Команды {% endblock %}
+
+{% block content %}
+
+<div class="container marketing bg-light">
+  <div class="text-center">
+         <h1>Турниры</h1>
+  </div>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+
+       {% for tournament in tournaments %}
+
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card bg-dark text-white">
+
+              {% if tournament.background %}
+
+            <a href="{% url 'id_tournament' tournament_id=tournament.id %}"> <img src="{{ tournament.background.url }}" class="card-img-top" width="100%" height="250" alt="..."></a>
+
+              {% else %}
+
+            <a href="{% url 'id_tournament' tournament_id=tournament.id %}"> <img src="{% static 'img/tournament_back.jpg' %}" class="card-img-top" width="100%" height="250" alt="..."></a>
+
+              {% endif %}
+
+              <div class="card-body">
+                  <p class="card-text"><h4>{{ tournament.title }}</h4></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'id_tournament' tournament_id=tournament.pk %}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <br>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+{% if user.is_superuser %}
+
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto; text-center">Добавить турнир</button>
+
+    <div id="id01" class="modal">
+      <div class="container px-5">
+
+        <form class="modal-content animate" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+
+          <div class="container px-5">
+
+          <label for="id_title"><b>Название</b></label>
+          <input type="text" name="title" class="form-control" placeholder="Название турнира" required="" maxlength="50" id="id_title">
+<!--            {{ form.title }}-->
+
+          <label for="id_info"><b>Информация</b></label>
+          <input type="text" name="info" class="form-control" placeholder="Информация о турнире" required="" maxlength="500" id="id_info">
+<!--            {{ form.info }}-->
+
+
+          <label for="id_start_date"><b>Дата старта</b></label>
+          <input type="text" name="start_date" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_start_date">
+<!--            {{ form.start_date }}-->
+
+            <br>
+
+          <label for="id_background"><b>Фото:</b></label>
+          <input type="file" name="background" accept="image/*" id="id_background">
+<!--          {{ form.background }}-->
+
+             <br>
+             <br>
+
+          <button type="submit">Добавить</button>
+             <br>
+             <br>
+
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+
+
+        </form>
+          </div>
+      </div>
+    </div>
+
+<script src="{% static 'js/info_command.js' %}"></script>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+<!--                Название-->
+<!--          {{ form.title }}-->
+<!--                информация о нем-->
+<!--          {{ form.info }}-->
+
+<!--            Дата старта:-->
+<!--          {{ form.start_date }}-->
+<!--фон-->
+<!--          {{ form.background }}-->
+
+<!--        <div class="col-12">-->
+<!--        <button type="submit" class="btn btn-primary">Добавить</button>-->
+<!--        </div>-->
+<!--      </form>-->
+
+

@@ -1,0 +1,75 @@
+{% extends 'templates/base.html' %}
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/registration.css' %}">
+<link rel="stylesheet" href=" {% static 'css/mdb.min.css' %}">
+
+
+
+{% endblock %}
+
+{% block title %} Вход {% endblock %}
+
+{% block content %}
+
+    <section class="vh-100 bg-image"
+  style="background-image: url('/static/img/fon_2_1280x648.jpg')">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Вход</h2>
+
+                 <form class="form-signin" method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+
+
+                    <div class="form-outline mb-4">
+                        <input id="username" type="text"  name="username" required class="form-control form-control-lg active">
+                        <label for="username" class="form-label"  style="margin-left: 0px;">Your Name </label>
+<!--                         {{ form.username }}-->
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 71.2px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                    <div class="form-outline mb-4">
+                      <input id="password" type="password" name="password" required class="form-control form-control-lg active">
+                      <label for="password" class="form-label" style="margin-left: 0px;">Password</label>
+<!--                        {{ form.password }}-->
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                    <div class="d-flex justify-content-center">
+
+                      <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Войти</button>
+                    </div>
+
+                  </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--    <form class="form-signin" method="post" action="{% url 'login' %}">-->
+<!--            {% csrf_token %}-->
+<!--        <div class="card text-center">-->
+<!--                 <h1>Пожалуйста укажите имя пользователя и пароль</h1>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--            <div class="col-md-4 mb-3 mx-auto">-->
+<!--                <label for="inputUsername" class="sr-only">Имя пользователя</label>-->
+<!--                {{ form.username }}-->
+<!--                <label for="inputPassword" class="sr-only">Пароль</label>-->
+<!--                {{ form.password }}-->
+<!--                <button class="btn mt-2 btn-lg btn-primary btn-block" type="submit">Войти</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
+{% endblock %}
+
