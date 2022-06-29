@@ -1,0 +1,43 @@
+{% extends 'templates/base.html' %}
+
+{% block title %} О турнире {% endblock %}
+
+{% block content %}
+
+
+<h1>{{ tournament }}</h1>
+
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'id_tournament' %}"> Инфо </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'commands_tournament' tournament_id=tournament.pk %}"> Команды </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'matches_tournament' tournament_id=tournament.pk%}"> Матчи </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='table' %}"> Турнирная таблица </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='scorers'%}"> Бомбардиры </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='assistants'%}"> Ассистенты </a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+{% endblock %}
+

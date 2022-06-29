@@ -1,0 +1,18 @@
+{% extends 'templates/base.html' %}
+
+{% block title %} Таблица бомбордиров {% endblock %}
+
+{% block content %}
+
+    <div class="features">
+        <h2>Таблица бомбордиров</h2>
+            </div>
+
+
+        {% for player_last_name, data in scorers_table.items %}
+            <div class="alert alert-warning">
+               <h3><a href="{% url 'player' id=data.self_player.pk %}">{{ player_last_name }}:</a> {{ data.goal }} </h3>
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}

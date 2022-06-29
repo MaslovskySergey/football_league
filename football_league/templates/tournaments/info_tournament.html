@@ -1,0 +1,14 @@
+
+{% extends 'templates/base.html' %}
+
+{% block title %} О турнире {% endblock %}
+
+{% block content %}
+
+<h1>О турнире</h1>
+
+{{ tournament.title }}
+{{ tournament.info }}
+{% include 'templates/includes/navbar.html' %}
+{% endblock %}
+

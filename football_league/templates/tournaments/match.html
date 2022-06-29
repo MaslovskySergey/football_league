@@ -1,0 +1,22 @@
+{% extends 'templates/base.html' %}
+
+{% block title %} {{match.date_and_time}} {% endblock %}
+
+{% block content %}
+
+        <div class="features">
+
+        <h1>{{ match.command_a }} - {{match.date_and_time}} - {{ match.command_b }}</h1>
+
+    </div>
+
+    <div class="features">
+        <h2>События матча</h2>
+
+        {% for event in match.events.all %}
+            <div class="alert alert-warning">
+                <h3>{{ event.minute }} {{ event.event }}</h3>
+            </div>
+        {% endfor %}
+
+{% endblock %}

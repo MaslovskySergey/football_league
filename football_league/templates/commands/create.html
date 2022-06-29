@@ -1,0 +1,87 @@
+{% extends 'templates/base.html' %}
+
+
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/registration.css' %}">
+<link rel="stylesheet" href=" {% static 'css/mdb.min.css' %}">
+
+
+
+{% endblock %}
+
+{% block title %} Создание команды {% endblock %}
+
+
+{% block content %}
+
+
+<section class="vh-100 bg-image"
+  style="background-image: url('/static/img/dream_team.jpg')">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Создание команды мечты</h2>
+
+              <form method="post" enctype="multipart/form-data" action="{% url 'create_commands' %}">
+              {% csrf_token %}
+
+<!--                  {{ form.name }}-->
+<!--                  {{ form.logo }}-->
+<!--                  {{ form.command_photo }}-->
+
+
+            <div class="card" style="border-radius: 15px;">
+              <div class="row align-items-center pt-4 pb-3">
+
+                <div class="col-md-9 pe-5">
+
+                    <label for="id_name"><b>Название команды</b></label>
+          <input type="text" name="name" placeholder="Введите название команды" maxlength="50" required="" id="id_name" class="form-control form-control-lg">
+                    <br>
+                    <label for="id_logo"><b>Логотип</b></label>
+          <input type="file" name="logo" accept="image/*" id="id_logo" class="form-control form-control-lg">
+<!--                  {{ form.logo }}-->
+                    <br>
+                    <label for="id_command_photo"><b>Командное фото</b></label>
+          <input type="file" name="command_photo" accept="image/*" id="id_command_photo" class="form-control form-control-lg">
+<!--                  {{ form.command_photo }}-->
+                </div>
+              </div>
+
+                    <div class="d-flex justify-content-center">
+                      <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Создать</button>
+                    </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+<!--        <div class="features">-->
+<!--            <h1>Создание команды</h1>-->
+<!--            <form method="post" enctype="multipart/form-data">-->
+<!--                {% csrf_token %}-->
+
+<!--            {{ form.name }}-->
+
+<!--            {{ form.logo }}-->
+<!--                -->
+<!--            {{ form.command_photo }}-->
+
+<!--            <button class="btn-success" type="submit">Создать</button>-->
+<!--        </form>-->
+<!--    </div>-->
