@@ -1,19 +1,41 @@
 {% extends 'templates/base.html' %}
 
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
 {% block title %} Турнирная таблица {% endblock %}
 
 {% block content %}
 
-    <div class="features">
-        <h2>Турнирная таблица</h2>
+  <br>
+  <div class="text-center">
+      <h1>Турнирная таблица</h1>
+  </div><br>
 
-
+  <div class="container marketing">
+    <div class="row g-8">
+      <div class="col-md-10">
 
         {% for com, res in tournament_table.items %}
-            <div class="alert alert-warning">
-                <h3><a href="{% url 'id' id=res.self_command.pk %}">{{ com }}:</a> {{ res }} </h3>
-            </div>
+
+          <h3><a href="{% url 'id' id=res.self_command.pk %}">{{ com }}:</a> {{ res }} </h3>
+
         {% endfor %}
-</div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="position-sticky" style="top: 2rem;">
+        {% include 'templates/includes/navbar.html' %}
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
+

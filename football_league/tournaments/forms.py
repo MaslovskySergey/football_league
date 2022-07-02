@@ -14,3 +14,13 @@ class MatchForm(ModelForm):
     class Meta:
         model = Match
         fields = ['date_and_time', 'tournament', 'command_a', 'command_b']
+
+        widgets = {
+            "tournament": forms.Select(choices=()),
+        }
+
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'

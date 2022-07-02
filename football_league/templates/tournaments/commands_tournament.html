@@ -13,60 +13,68 @@
 {% block title %} Команды {% endblock %}
 
 {% block content %}
+  <br>
+  <div class="text-center">
+      <h1>Команды</h1>
+  </div><br>
 
-<div class="container marketing bg-light">
-{% include 'templates/includes/navbar.html' %}
+  <div class="container marketing">
+    <div class="row g-8">
+      <div class="col-md-10">
+        <div class="row">
 
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        {% for command in tournament.commands.all %}
-        <div class="col-md-3">
-          <div class="card shadow-sm">
-              {% if command.command_photo %}
-            <a href="{% url 'id' id=command.id %}"> <img src="{{ command.command_photo.url }}" class="card-img-top" width="100%" height="200" alt="..."></a>
-              {% else %}
-            <a href="{% url 'id' id=command.id %}"> <img src="{% static 'img/com_photo.jpg' %}" class="card-img-top" width="100%" height="200" alt="..."></a>
-              {% endif %}
-            <div class="card-body">
-                  <p class="card-text"><h4>{{ command.name }}</h4></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="{% url 'id' id=command.id %}">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
-                  </a>
+          {% for command in tournament.commands.all %}
+          <div class="col-md-4">
+            <div class="card shadow-sm">
+                {% if command.command_photo %}
+              <a href="{% url 'id' id=command.id %}"> <img src="{{ command.command_photo.url }}" class="card-img-top" width="100%" height="200" alt="..."></a>
+                {% else %}
+              <a href="{% url 'id' id=command.id %}"> <img src="{% static 'img/com_photo.jpg' %}" class="card-img-top" width="100%" height="200" alt="..."></a>
+                {% endif %}
+              <div class="card-body">
+                <p class="card-text"><h4>{{ command.name }}</h4></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'id' id=command.id %}">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+            {% endfor %}
+
         </div>
-          {% endfor %}
       </div>
-          <br>
 
-  {% if user.is_superuser %}
+      <div class="col-md-2">
+        <div class="position-sticky" style="top: 2rem;">
 
+          {% include 'templates/includes/navbar.html' %}<br>
+
+            {% if user.is_superuser %}
+      <div class="text-center container">
       <form action="{% url 'commands_tournament' tournament_id=tournament.pk %}" method="post">
 
-        {% csrf_token %}
+      {% csrf_token %}
 
-        <div class="checkselect">
-          {% for command_tour in commands_add %}
+    <div class="checkselect">
+      {% for command_tour in commands_add %}
 
           <label><input type="checkbox" name="{{ command_tour.name }}" value="{{ command_tour.id }}">{{ command_tour.name }}</label>
+            {% endfor %}
+    </div><br><br>
 
-          {% endfor %}
-        </div>
-
-        <button type="submit">Добавить</button>
+      <button type="submit">Добавить</button>
       </form>
+  </div>
 
+        </div>
+      </div>
     </div>
-</div>
+    </div>
 
-<br>
-<br>
 
 
 <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
@@ -74,5 +82,3 @@
 
 {% endif %}
 {% endblock %}
-
-

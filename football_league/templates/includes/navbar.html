@@ -1,27 +1,40 @@
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+<!--    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">-->
       <div class="position-sticky pt-3">
+        <div class="btn-group-vertical">
         <ul class="nav flex-column">
 
+
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'commands_tournament' tournament_id=tournament.pk %}"> Команды </a>
+            <a class="nav-link" href="{% url 'id_tournament' tournament_id=tournament.pk %}">
+            <button type="button" class="btn btn-outline-success">О турнире</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'matches_tournament' tournament_id=tournament.pk %}"> Матчи </a>
+            <a class="nav-link" href="{% url 'commands_tournament' tournament_id=tournament.pk %}">
+            <button type="button" class="btn btn-outline-success">Команды</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='table' %}"> Турнирная таблица </a>
+            <a class="nav-link" href="{% url 'matches_tournament' tournament_id=tournament.pk %}">
+            <button type="button" class="btn btn-outline-success">Матчи</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='scorers'%}"> Бомбардиры </a>
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='table' %}">
+            <button type="button" class="btn btn-outline-success">Турнирная таблица</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='assistants'%}"> Ассистенты </a>
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='scorers'%}">
+            <button type="button" class="btn btn-outline-success">Бомбардиры</button></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tournament_table' tournament_id=tournament.pk type='assistants'%}">
+            <button type="button" class="btn btn-outline-success">Ассистенты</button></a>
           </li>
 
         </ul>
+          </div>
       </div>
     </nav>

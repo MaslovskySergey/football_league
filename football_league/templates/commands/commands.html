@@ -15,12 +15,15 @@
 
 
   <div class="container marketing bg-light">
+    <div class="text-center">
+         <h1>Все команды</h1>
+     </div><br>
 
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row">
         {% for command in commands %}
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card shadow-sm">
               {% if command.command_photo %}
             <a href="{% url 'id' id=command.id %}"> <img src="{{ command.command_photo.url }}" class="card-img-top" width="100%" height="200" alt="..."></a>

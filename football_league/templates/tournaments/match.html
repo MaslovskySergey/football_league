@@ -1,22 +1,42 @@
+
 {% extends 'templates/base.html' %}
 
-{% block title %} {{match.date_and_time}} {% endblock %}
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
+{% block title %} {{ match.date_and_time }} {% endblock %}
 
 {% block content %}
 
-        <div class="features">
+<br>
+  <div class="text-center">
+      <h1>{{ match.date_and_time }}</h1>
+  </div><br>
 
-        <h1>{{ match.command_a }} - {{match.date_and_time}} - {{ match.command_b }}</h1>
-
-    </div>
-
-    <div class="features">
-        <h2>События матча</h2>
-
-        {% for event in match.events.all %}
+  <div class="container marketing">
+    <div class="row g-8">
+      <div class="col-md-10">
+         {% for event in match.events.all %}
             <div class="alert alert-warning">
                 <h3>{{ event.minute }} {{ event.event }}</h3>
             </div>
         {% endfor %}
+      </div>
+      <div class="col-md-2">
+        <div class="position-sticky" style="top: 2rem;">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
+
+
+

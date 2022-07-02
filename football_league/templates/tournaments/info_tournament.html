@@ -1,14 +1,37 @@
 
 {% extends 'templates/base.html' %}
 
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
 {% block title %} О турнире {% endblock %}
 
 {% block content %}
 
-<h1>О турнире</h1>
+<br>
+  <div class="text-center">
+      <h1>{{ tournament.title }}</h1>
+  </div><br>
 
-{{ tournament.title }}
-{{ tournament.info }}
-{% include 'templates/includes/navbar.html' %}
+  <div class="container marketing">
+    <div class="row g-8">
+      <div class="col-md-10">
+        {{ tournament.info }}
+      </div>
+      <div class="col-md-2">
+        <div class="position-sticky" style="top: 2rem;">
+
+            {% include 'templates/includes/navbar.html' %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 

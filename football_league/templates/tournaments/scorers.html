@@ -1,18 +1,44 @@
 {% extends 'templates/base.html' %}
 
-{% block title %} Таблица бомбордиров {% endblock %}
+{% load static %}
+
+{% block css_add %}
+
+<link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}">
+
+{% endblock %}
+
+{% block title %} Таблица бомбарлиров {% endblock %}
 
 {% block content %}
 
-    <div class="features">
-        <h2>Таблица бомбордиров</h2>
-            </div>
+  <br>
+  <div class="text-center">
+      <h1>Бомбардиры</h1>
+  </div><br>
 
+  <div class="container marketing">
+    <div class="row g-8">
+      <div class="col-md-10">
 
         {% for player_last_name, data in scorers_table.items %}
             <div class="alert alert-warning">
                <h3><a href="{% url 'player' id=data.self_player.pk %}">{{ player_last_name }}:</a> {{ data.goal }} </h3>
             </div>
         {% endfor %}
-</div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="position-sticky" style="top: 2rem;">
+        {% include 'templates/includes/navbar.html' %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
+
+
+
+
