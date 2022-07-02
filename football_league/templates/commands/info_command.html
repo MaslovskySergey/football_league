@@ -51,6 +51,9 @@
     </div>
             {% endif %}
 
+     <div class="text-center">
+         <h1>Игроки</h1>
+     </div><br>
 
 <div class="album bg-light">
     <div class="container">
@@ -106,10 +109,11 @@
           <input type="text" name="last_name" class="form-control" placeholder="Фамилия игрока" required="" maxlength="50" id="id_last_name">
 <!--            {{ form.last_name }}-->
 
+          <div class="inputdate">
           <label for="id_date_of_birth"><b>Дата рождения</b></label>
-          <input type="text" name="date_of_birth" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_date_of_birth">
+          <input type="date" name="date_of_birth" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_date_of_birth">
 <!--            {{ form.date_of_birth }}-->
-
+          </div>
             <br>
             <br>
 

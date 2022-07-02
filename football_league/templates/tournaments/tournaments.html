@@ -82,10 +82,11 @@
           <input type="text" name="info" class="form-control" placeholder="Информация о турнире" required="" maxlength="500" id="id_info">
 <!--            {{ form.info }}-->
 
-
+          <div class="inputdate">
           <label for="id_start_date"><b>Дата старта</b></label>
-          <input type="text" name="start_date" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_start_date">
+          <input type="date" name="start_date" class="form-control" placeholder="Дата" required="" maxlength="50" id="id_start_date">
 <!--            {{ form.start_date }}-->
+          </div>
 
             <br>
 
@@ -111,22 +112,5 @@
 <script src="{% static 'js/info_command.js' %}"></script>
     {% endif %}
 </div>
+
 {% endblock %}
-
-
-<!--                Название-->
-<!--          {{ form.title }}-->
-<!--                информация о нем-->
-<!--          {{ form.info }}-->
-
-<!--            Дата старта:-->
-<!--          {{ form.start_date }}-->
-<!--фон-->
-<!--          {{ form.background }}-->
-
-<!--        <div class="col-12">-->
-<!--        <button type="submit" class="btn btn-primary">Добавить</button>-->
-<!--        </div>-->
-<!--      </form>-->
-
-

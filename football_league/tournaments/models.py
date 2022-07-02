@@ -13,18 +13,18 @@ class Tournament(models.Model):
         ordering = ['title']
 
     def __str__(self):
-        return f"{self.title} {self.start_date}"
+        return f"{self.title}"
 
 
 class Match(models.Model):
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True, related_name='matches')
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, verbose_name='Турнир', related_name='matches')
     date_and_time = models.DateTimeField()
     command_a = models.ForeignKey(Command, on_delete=models.CASCADE, null=True, related_name='+')
     command_b = models.ForeignKey(Command, on_delete=models.CASCADE, null=True, related_name='+')
     status = models.BooleanField(verbose_name="Статус", default=False)
 
     class Meta:
-        ordering = ['-date_and_time']
+        ordering = ['date_and_time']
 
     def __str__(self):
         return f"{self.command_a} {self.date_and_time} {self.command_b}"

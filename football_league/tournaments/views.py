@@ -62,48 +62,45 @@ class CommandsTournamentView(View):
     def post(self, request, tournament_id, *args, **kwargs):
         tournament = get_object_or_404(Tournament, id=tournament_id)
         form = request.POST
-        if form.is_valid:
-            for command in form:
-                if command != "csrfmiddlewaretoken":
-                    commands_add = form.get(command)
-                    tournament.commands.add(commands_add)
+
+        for command in form:
+            if command != "csrfmiddlewaretoken":
+                commands_add = form.get(command)
+                tournament.commands.add(commands_add)
         return redirect('commands_tournament', tournament.pk)
-
-#
-# class MatchesTournamentView(View):
-#     def get(self, request, tournament_id, *args, **kwargs):
-#         tournament = get_object_or_404(Tournament, id=tournament_id)
-
-#         commands_in_tournament = tournament.commands.all()
-#         #
-#         # data = {"tournament": tournament,
-#         #         "commands_in_tournament": commands_in_tournament}
-#         data = {"tournament": tournament}
-#
-#         if request.user.is_superuser:
-#             data["form"] = MatchForm()
-#             data["commands_in_tournament"] = commands_in_tournament
-#         return render(request, "templates/tournaments/matches_tournament.html", context=data)
 
 
 class MatchesTournamentView(View):
     def get(self, request, tournament_id, *args, **kwargs):
         tournament = get_object_or_404(Tournament, id=tournament_id)
 
+        commands_in_tournament = tournament.commands.all()
+        data = {"tournament": tournament}
+        if request.user.is_superuser:
+            # data["form"] = MatchForm()
+            data["commands_in_tournament"] = commands_in_tournament
+        return render(request, "templates/tournaments/matches_tournament.html", context=data)
 
+    def post(self, request, *args, **kwargs):
+        # tournament = get_object_or_404(Tournament, id=tournament_id)
 
-    def post(self, request, tournament_id, *args, **kwargs):
-        tournament = get_object_or_404(Tournament, id=tournament_id)
-
-        return redirect('matches_tournament', tournament.pk)
+        form = MatchForm(request.POST)
+        # if form.is_valid():
+        form.save()
+        tournament_id = form.cleaned_data.get("tournament").pk
+        # return render(request, "templates/tournaments/matches_tournament.html", context={})
+        return redirect('matches_tournament', tournament_id)
 
 
 class MatchView(View):
     def get(self, request, match_id, *args, **kwargs):
+        # tournament = get_object_or_404(Tournament, id=tournament_id)
         match = get_object_or_404(Match, id=match_id)
-        return render(request, "templates/tournaments/match.html", context={
-            'match': match
-        })
+        data = {
+            'match': match,
+            # 'tournament': tournament,
+        }
+        return render(request, "templates/tournaments/match.html", context=data)
 
 
 class TournamentTableView(View):
@@ -211,15 +208,18 @@ class TournamentTableView(View):
         if type == "table":
             return render(request, "templates/tournaments/table.html", context={
                 'tournament_table': tournament_table,
+                'tournament': tournament,
             })
 
         elif type == "scorers":
             return render(request, "templates/tournaments/scorers.html", context={
                 'scorers_table': scorers_table,
+                'tournament': tournament,
             })
 
         elif type == "assistants":
             return render(request, "templates/tournaments/assistant.html", context={
                 'assistants_table': assistants_table,
+                'tournament': tournament,
             })
 
