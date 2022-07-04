@@ -96,9 +96,10 @@ class MatchView(View):
     def get(self, request, match_id, *args, **kwargs):
         # tournament = get_object_or_404(Tournament, id=tournament_id)
         match = get_object_or_404(Match, id=match_id)
+
         data = {
             'match': match,
-            # 'tournament': tournament,
+            'tournament': match.tournament,
         }
         return render(request, "templates/tournaments/match.html", context=data)
 
